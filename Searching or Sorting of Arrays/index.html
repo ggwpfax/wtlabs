@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Searching and Sorting</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            padding: 50px;
+        }
+
+        .array-container {
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+
+        .array-container h3 {
+            margin-bottom: 20px;
+        }
+
+        .array-container button {
+            margin-top: 20px;
+            background-color: #7FFFD4;
+            border-color: #000000;
+            color: #000000;
+
+        }
+
+        .array-container button:hover {
+            background-color: #088F8F;
+            /* Green */
+            color: white;
+        }
+
+        .result-container {
+            margin-top: 30px;
+            display: none;
+        }
+
+        .result-container h3 {
+            margin-bottom: 20px;
+        }
+
+        .result-container p {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Searching and Sorting</h1>
+        <div class="array-container">
+            <h3>Integer Array Operations</h3>
+            <div class="form-group">
+                <label for="integer-array">Enter comma-separated integer array:</label>
+                <input type="text" class="form-control" id="integer-array" placeholder="Example: 1, 5, 3, 2, 4">
+            </div>
+            <button class="btn btn-primary" id="sort-integer-array-btn">Sort Array</button>
+            <button class="btn btn-primary" id="search-integer-array-btn">Search Array</button>
+            <div class="form-group">
+                <hr>
+                <label for="search-integer-array-input">Enter element to search:</label>
+                <input type="text" class="form-control" id="search-integer-array-input" placeholder="Example: 3">
+            </div>
+            <div class="result-container" id="integer-array-result-container">
+                <h3>Results:</h3>
+                <p id="integer-array-result"></p>
+            </div>
+        </div>
+        <div class="array-container">
+            <h3>Named Entity Array Operations</h3>
+            <div class="form-group">
+                <label for="named-entity-array">Enter comma-separated named entity array:</label>
+                <input type="text" class="form-control" id="named-entity-array"
+                    placeholder="Example: John, Sarah, Tom, Lisa, Bob">
+            </div>
+            <button class="btn btn-primary" id="sort-named-entity-array-btn">Sort Array</button>
+            <button class="btn btn-primary" id="search-named-entity-array-btn">Search Array</button>
+            <div class="form-group">
+                <hr>
+                <label for="search-named-entity-input">Enter element to search:</label>
+                <input type="text" class="form-control" id="search-named-entity-input" placeholder="Example: John">
+            </div>
+            <div class="result-container" id="named-entity-array-result-container">
+                <h3>Results:</h3>
+                <p id="named-entity-array-result"></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $("#sort-integer-array-btn").click(function () {
+            var integerArray = $("#integer-array").val().split(",");
+            var sortedArray = integerArray.sort(function (a, b) {
+                return a - b;
+            });
+            $("#integer-array-result-container").show();
+            $("#integer-array-result").text(sortedArray.join(", "));
+        });
+
+        $("#search-integer-array-btn").click(function () {
+            var integerArray = $("#integer-array").val().split(",");
+            var searchQuery = $("#search-integer-array-input").val().trim();
+            var matchingIntegers = [];
+            for (var i = 0; i < integerArray.length; i++) {
+                if (integerArray[i] === searchQuery) {
+                    matchingIntegers.push(integerArray[i]);
+                }
+            }
+            $("#integer-array-result-container").show();
+            if (matchingIntegers.length > 0) {
+                $("#integer-array-result").text("Found integer " + searchQuery + " at index " + integerArray.indexOf(searchQuery));
+            }
+            else {
+                $("#integer-array-result").text("Integer " + searchQuery + " not found.");
+            }
+        });
+
+        $("#sort-named-entity-array-btn").click(function () {
+            var namedEntityArray = $("#named-entity-array").val().split(",");
+            var sortedArray = namedEntityArray.sort();
+            $("#named-entity-array-result-container").show();
+            $("#named-entity-array-result").text(sortedArray.join(", "));
+        });
+
+        $("#search-named-entity-array-btn").click(function () {
+            var namedEntityArray = $("#named-entity-array").val().split(",");
+            var searchQuery = $("#search-named-entity-input").val();
+            var matchingEntities = [];
+            for (var i = 0; i < namedEntityArray.length; i++) {
+                if (namedEntityArray[i].includes(searchQuery)) {
+                    matchingEntities.push(namedEntityArray[i]);
+                }
+            }
+            $("#named-entity-array-result-container").show();
+            if (matchingEntities.length > 0) {
+                $("#named-entity-array-result").text(matchingEntities.join(", "));
+            }
+            else {
+                $("#named-entity-array-result").text("No matching entities found.");
+            }
+        });
+
+    </script>
+</body>
+
+</html>

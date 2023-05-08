@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Electricity Bill Calculator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"/>
+    <link rel="stylesheet" th:href="@{/style.css}"/>
+
+    <style>
+        /* Custom CSS Styles */
+        body {
+            background-color: #f5f5f5;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        h4 {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #333;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+        }
+        label {
+            font-weight: bold;
+        }
+        input {
+            border-radius: 3px;
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+        }
+        button:hover {
+            background-color: #0062cc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h2>Electricity Bill Generator</h2>
+    <h4 class="my-4">Generate your bill here</h4>
+    <form method="post" th:action="@{/}" id="billForm">
+        <div class="form-group my-3">
+            <label for="units">Enter Total Units Consumed:</label>
+            <input type="number" class="form-control my-3" id="units" name="units" required>
+        </div>
+        <button type="submit" class="btn btn-primary" id = "calculate-btn">Calculate</button>
+    </form>
+    <br>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $('#billForm').submit(function(event) {
+            event.preventDefault();
+            var units = parseInt($('#units').val());
+            if (units <= 0 || isNaN(units)) {
+                alert('Please enter a valid number of units consumed.');
+                return;
+            }
+            this.submit();
+        });
+    });
+</script>
+</body>
+</html>
